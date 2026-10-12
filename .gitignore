@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+logs/
+tmp/
+.env
+servers.json
+metamcp.pid
+metamcp.started
+*.egg-info/
+__pycache__/
+.venv/

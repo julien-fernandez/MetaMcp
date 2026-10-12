@@ -1,0 +1,54 @@
+{
+  "port": 8750,
+  "panicIfInvalid": false,
+  "servers": {
+    "my-node-server": {
+      "command": "node",
+      "args": ["path/to/server/dist/index.js"],
+      "env": {
+        "NODE_OPTIONS": "--max-old-space-size=256"
+      }
+    },
+    "my-python-server": {
+      "command": "python",
+      "args": ["path/to/server/main.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "MALLOC_TRIM_THRESHOLD_": "65536"
+      },
+      "hiddenTools": ["dangerous_tool", "debug_internal"]
+    },
+    "my-oauth-server": {
+      "command": "python",
+      "args": ["path/to/server.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1",
+        "CLIENT_ID": "${GOOGLE_CLIENT_ID}",
+        "CLIENT_SECRET": "${GOOGLE_CLIENT_SECRET}"
+      },
+      "exposedTools": ["search", "read", "write"],
+      "toolOverrides": {
+        "search": { "description": "Search Google Drive files and folders" },
+        "read": { "name": "google_read", "description": "Read a Google Doc" }
+      }
+    },
+    "my-lazy-server": {
+      "command": "node",
+      "args": ["path/to/rarely-used/dist/index.js"],
+      "env": {
+        "API_KEY": "${MY_API_KEY}",
+        "NODE_OPTIONS": "--max-old-space-size=256"
+      },
+      "lazy": true
+    },
+    "my-venv-server": {
+      "command": "path/to/venv/Scripts/python.exe",
+      "args": ["path/to/server.py"],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "lazy": true
+    }
+  }
+}
